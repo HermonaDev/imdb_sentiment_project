@@ -59,7 +59,7 @@ python predict.py "I loved this movie!"
 Review: I loved this movie!
 Analyzing sentiment...
 Sentiment: positive
-Confidence: 0.8503
+Confidence: 81.3%
 ```
 
 ```bash
@@ -70,7 +70,7 @@ python predict.py "This movie was terrible and boring."
 Review: This movie was terrible and boring.
 Analyzing sentiment...
 Sentiment: negative
-Confidence: 0.9315
+Confidence: 96.3%
 ```
 
 ## Project Structure
@@ -82,14 +82,14 @@ imdb_sentiment_project/
 ├── requirements.txt          # Python dependencies
 ├── README.md                 # Project documentation
 ├── imdb_reviews_subset.csv   # Subset for training (5K samples, balanced)
-├── sentiment_model.pkl       # Trained model (created after training)
+├── sentiment_classifier.pkl       # Trained model (created after training)
 └── tfidf_vectorizer.pkl      # TF-IDF vectorizer (created after training)
 ```
 
 ## Technical Details
 
 ### Model Architecture
-- **Text Vectorization**: TF-IDF with 10000 max features
+- **Text Vectorization**: TF-IDF with 8000 max features
 - **N-grams**: Unigrams, bigrams, and trigrams (1-3 word combinations)
 - **Stop Words**: English stop words removed
 - **Classifier**: Logistic Regression with L2 regularization
