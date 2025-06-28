@@ -19,6 +19,7 @@ This project demonstrates a complete machine learning pipeline for sentiment ana
 - ✅ Model persistence with joblib
 - ✅ Confidence scoring
 - ✅ Easy-to-use API
+- ✅ **Bonus: Flask REST API endpoint**
 
 ## Installation
 
@@ -48,6 +49,8 @@ This will:
 
 ### 2. Make Predictions
 
+#### Command Line Interface
+
 Use the trained model to predict sentiment for new reviews:
 
 ```bash
@@ -73,16 +76,61 @@ Sentiment: negative
 Confidence: 96.3%
 ```
 
+#### REST API (Optional Bonus)
+
+Start the Flask API server:
+
+```bash
+python app.py
+```
+
+**Available endpoints:**
+
+- `GET /` - API information
+- `GET /health` - Health check
+- `POST /predict` - Predict sentiment (JSON)
+- `GET /predict/<review>` - Predict sentiment (URL)
+
+**Example API usage:**
+
+```powershell
+# POST request with JSON (PowerShell)
+Invoke-WebRequest -Uri "http://localhost:5000/predict" -Method POST -Headers @{"Content-Type"="application/json"} -Body '{"review": "This movie was absolutely fantastic!"}'
+
+# GET request with URL parameter (PowerShell)
+Invoke-WebRequest -Uri "http://localhost:5000/predict/This%20movie%20was%20fantastic!"
+```
+
+**Alternative: Using curl (if available in Git Bash or WSL):**
+```bash
+# POST request with JSON
+curl -X POST http://localhost:5000/predict -H "Content-Type: application/json" -d '{"review": "This movie was absolutely fantastic!"}'
+
+# GET request with URL parameter
+curl "http://localhost:5000/predict/This%20movie%20was%20fantastic!"
+```
+
+**API Response:**
+```json
+{
+  "review": "This movie was absolutely fantastic!",
+  "sentiment": "positive",
+  "confidence": 81.3,
+  "confidence_percentage": "81.3%"
+}
+```
+
 ## Project Structure
 
 ```
 imdb_sentiment_project/
 ├── train.py                  # Training script
 ├── predict.py                # Prediction script
+├── app.py                    # Flask API server (optional bonus)
 ├── requirements.txt          # Python dependencies
 ├── README.md                 # Project documentation
 ├── imdb_reviews_subset.csv   # Subset for training (5K samples, balanced)
-├── sentiment_classifier.pkl       # Trained model (created after training)
+├── sentiment_classifier.pkl  # Trained model (created after training)
 └── tfidf_vectorizer.pkl      # TF-IDF vectorizer (created after training)
 ```
 
